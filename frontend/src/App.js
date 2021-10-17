@@ -22,8 +22,12 @@ function App() {
       socket.emit('updateCoords', { id, coords });
    }
 
-   //By passing the mongodb document id and updated coords array into this function, It will save the new coords to database realtime.
-   updateCoords('616282dc09b498127d797216', [38.899343, -77.014565]);
+   //Geth the Users location
+   navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      //By passing the mongodb document id and updated coords array into this function, It will save the new coords to database realtime.
+      updateCoords('616282dc09b498127d797215', [longitude, latitude]); //* You need to pass longitude first not the latitude for geojson formating
+   });
 
    //call to get the recent updated data from database. You can also use await insted of then inside any await function
    getUpdatedCoords().then((val) => {

@@ -7,7 +7,8 @@ const cordsSchema = new mongoose.Schema({
       coordinates: [Number],
    },
 });
-cordsSchema.index({ location: '2dsphere' });
+cordsSchema.index({ 'location.coordinates': '2dsphere' });
+
 const Coordinates = mongoose.model('coordinate', cordsSchema);
 
 module.exports = Coordinates;

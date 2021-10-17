@@ -28,13 +28,14 @@ const io = new Server(expressServer, {
 const processUpdateCoords = async function (data) {
    const { id, coords: updatedCoords } = data;
    //query to database to update the coords
+
    await Coordinates.findOneAndUpdate(
       { _id: id },
       {
          $set: {
             location: {
                type: 'Point',
-               coordinates: [...updatedCoords],
+               coordinates: updatedCoords,
             },
          },
       }
